@@ -211,7 +211,7 @@ ssize_t simple_default_get_extended_bootinfo_size(void *data, seL4_Word type)
     seL4_BootInfo *bi = data;
 
     /* start of the extended bootinfo is defined to be 4K from the start of regular bootinfo */
-    uintptr_t cur = (uintptr_t)bi + PAGE_SIZE_4K;
+    uintptr_t cur = (uintptr_t)bi + SEL4_BI_FRAME_SIZE;
     uintptr_t end = cur + bi->extraLen;
     while (cur < end) {
         seL4_BootInfoHeader *header = (seL4_BootInfoHeader *)cur;
@@ -233,7 +233,7 @@ ssize_t simple_default_get_extended_bootinfo(void *data, seL4_Word type, void *d
         return -1;
     }
     /* start of the extended bootinfo is defined to be 4K from the start of regular bootinfo */
-    uintptr_t cur = (uintptr_t)bi + PAGE_SIZE_4K;
+    uintptr_t cur = (uintptr_t)bi + SEL4_BI_FRAME_SIZE;
     uintptr_t end = cur + bi->extraLen;
     while (cur < end) {
         seL4_BootInfoHeader *header = (seL4_BootInfoHeader *)cur;
